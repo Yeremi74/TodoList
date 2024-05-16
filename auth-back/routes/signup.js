@@ -1,16 +1,16 @@
-const express = require("express");
-const User = require("../schema/user");
-const { jsonResponse } = require("../lib/jsonResponse");
+const express = require('express');
+const User = require('../schema/user');
+const { jsonResponse } = require('../lib/jsonResponse');
 const router = express.Router();
 
-router.post("/", async function (req, res, next) {
+router.post('/', async function (req, res, next) {
   const { username, password, name } = req.body;
 
   if (!username || !password || !name) {
     //return next(new Error("username and password are required"));
     return res.status(409).json(
       jsonResponse(409, {
-        error: "username and password are required",
+        error: 'username and password are required',
       })
     );
   }
@@ -22,7 +22,7 @@ router.post("/", async function (req, res, next) {
     if (userExists) {
       return res.status(409).json(
         jsonResponse(409, {
-          error: "username already exists",
+          error: 'username already exists',
         })
       );
       //return next(new Error("user already exists"));
@@ -33,14 +33,15 @@ router.post("/", async function (req, res, next) {
 
       res.json(
         jsonResponse(200, {
-          message: "User created successfully",
+          message: 'User created successfully',
         })
       );
     }
   } catch (err) {
+    console.log(err);
     return res.status(500).json(
       jsonResponse(500, {
-        error: "Error creating user",
+        error: 'Error creating user',
       })
     );
     //return next(new Error(err.message));

@@ -23,6 +23,7 @@ export default function Signup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password, name }),
       });
+      console.log(response)
       if (response.ok) {
         const json = (await response.json()) as AuthResponse;
         console.log(json);
